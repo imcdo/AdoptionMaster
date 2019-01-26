@@ -23,6 +23,8 @@ public class PeopleGenerator : MonoBehaviour
     {
         GameObject person = new GameObject();
         Stats stats = person.AddComponent<Stats>();
+        SpriteRenderer sr = person.AddComponent<SpriteRenderer>();
+        Person ps = person.AddComponent<Person>();
         return person;
     }
 
@@ -37,6 +39,8 @@ public class PeopleGenerator : MonoBehaviour
                 GameObject person = GeneratePerson();
                 peopleQ.Enqueue(person);
                 Debug.Log("Created a Person");
+                
+                // TODO: Instatiate the person
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
             }
             else

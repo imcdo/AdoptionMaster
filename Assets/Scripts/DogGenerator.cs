@@ -13,9 +13,9 @@ public class DogGenerator : MonoBehaviour
     {
         GameObject dog = new GameObject();
         Stats stats = dog.AddComponent<Stats>();
-        DogBehavior db = dog.AddComponent<DogBehavior>();
         SpriteRenderer sr = dog.AddComponent<SpriteRenderer>();
         Dog ds = dog.AddComponent<Dog>();
+        DogBehavior db = dog.AddComponent<DogBehavior>();
 
         return dog;
     }
