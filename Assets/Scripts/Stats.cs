@@ -48,10 +48,10 @@ public class Stats : MonoBehaviour
 
     private void printData()
     {
-        string name = gameObject.transform.name;
-        Debug.Log(name + "'s alergy: " + alergy);
-        Debug.Log(name + "'s fancy: " + fancy);
-        Debug.Log(name + "'s energy: " + energy);
-        Debug.Log(name + "'s sociality: " + sociality);
+        //string name = gameObject.transform.name;
+        //Debug.Log(name + "'s alergy: " + alergy);
+        //Debug.Log(name + "'s fancy: " + fancy);
+        //Debug.Log(name + "'s energy: " + energy);
+        //Debug.Log(name + "'s sociality: " + sociality);
     }
 }
