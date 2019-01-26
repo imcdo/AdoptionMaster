@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - Animals
-  - 
+  - Mouse
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mouse
+    uniqueID: 3066245933
     locked: 0

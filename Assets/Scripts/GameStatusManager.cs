@@ -35,7 +35,6 @@ public class GameStatusManager : MonoBehaviour
 
     private void MouseInteractions()
     {
-        Debug.Assert(grabedDog == null);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -48,6 +47,9 @@ public class GameStatusManager : MonoBehaviour
             grabedDog = Animal;
             Debug.Assert(Animal != null);
             Debug.Log(Animal);
+
+            Animal.layer = LayerMask.NameToLayer("Mouse");
+            Debug.Log("layer :" + Animal.layer);
             DogBehavior db = grabedDog.GetComponent<DogBehavior>();
             if (db != null)
             {
@@ -65,11 +67,14 @@ public class GameStatusManager : MonoBehaviour
                 Vector3 point = ray.GetPoint(0);
                 point.z = 0;
 
+                grabedDog.layer = LayerMask.NameToLayer("Animals");
+
                 DogBehavior db = grabedDog.GetComponent<DogBehavior>();
                 if (db != null)
                 {
                     db.grabbed = false;
                 }
+
             }
             grabedDog = null;
         }

@@ -30,6 +30,7 @@ public class DogGenerator : MonoBehaviour
     {
         Debug.Log(LayerMask.NameToLayer("Animals"));
         gameObject.layer = LayerMask.NameToLayer("Animals");
+        Debug.Log("layer : " + gameObject.layer);
         Random spriteSelector = new Random();
         GameObject dog = new GameObject();
         Stats stats = dog.AddComponent<Stats>();
