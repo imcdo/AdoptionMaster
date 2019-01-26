@@ -5,9 +5,14 @@ using BehaviorTreeSpace;
 
 public class DogBehavior : MonoBehaviour
 {
-    Behavior root;
+    private Behavior root;
+    private Dog ds;
+
     void Awake()
     {
+        ds = gameObject.GetComponent<Dog>();
+        Debug.Assert(ds != null);
+
         BuildTree();
     }
 

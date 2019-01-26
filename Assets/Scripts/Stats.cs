@@ -15,6 +15,8 @@ public class Stats : MonoBehaviour
         fancy = Random.value;
         energy = Random.value;
         sociality = Random.value;
+
+        printData();
     }
 
     // returns the average diferents in 2 diferents stats objects
@@ -44,7 +46,7 @@ public class Stats : MonoBehaviour
         Debug.Assert(sociality <= 1);
     }
 
-    private void Update()
+    private void printData()
     {
         //string name = gameObject.transform.name;
         //Debug.Log(name + "'s alergy: " + alergy);
