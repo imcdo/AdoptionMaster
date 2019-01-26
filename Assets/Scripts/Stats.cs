@@ -16,7 +16,7 @@ public class Stats : MonoBehaviour
         energy = Random.value;
         sociality = Random.value;
 
-        printData();
+        // printData();
     }
 
     // returns the average diferents in 2 diferents stats objects

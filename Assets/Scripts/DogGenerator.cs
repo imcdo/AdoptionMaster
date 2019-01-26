@@ -37,7 +37,11 @@ public class DogGenerator : MonoBehaviour
         DogBehavior db = dog.AddComponent<DogBehavior>();
         dog.transform.name = "Dog";
         BoxCollider2D bc = dog.AddComponent<BoxCollider2D>();
-        CharacterController cc = dog.AddComponent<CharacterController>();
+        bc.isTrigger = true;
+        Rigidbody2D rb = dog.AddComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 0;
+        rb.freezeRotation = true;
 
         return dog;
     }

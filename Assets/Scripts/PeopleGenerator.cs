@@ -16,7 +16,7 @@ public class PeopleGenerator : MonoBehaviour
         Debug.Assert(peopleQ == null);
         peopleQ = new Queue<GameObject>();
 
-        StartCoroutine("spawnPerson");
+        StartCoroutine("PersonSpawner");
     }
 
     public GameObject GeneratePerson()
@@ -30,17 +30,23 @@ public class PeopleGenerator : MonoBehaviour
         return person;
     }
 
-    IEnumerator spawnPerson()
+    public GameObject spawnPerson()
+    {
+        GameObject person = GeneratePerson();
+        GameObject ourPerson = Instantiate(person);
+        peopleQ.Enqueue(ourPerson);
+        return ourPerson;
+    }
+
+    IEnumerator PersonSpawner()
     {
         while (true)
         { 
             if(peopleQ.Count >= maxPeopleQLength) { spawningPeople = false; }
             else { spawningPeople = true; }
             if(spawningPeople)
-            { 
-                GameObject person = GeneratePerson();
-                GameObject ourPerson = Instantiate(person);
-                peopleQ.Enqueue(ourPerson);
+            {
+                spawnPerson();
                 Debug.Log("Created a Person");
 
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
