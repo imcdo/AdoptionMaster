@@ -25,6 +25,8 @@ public class PeopleGenerator : MonoBehaviour
         Stats stats = person.AddComponent<Stats>();
         SpriteRenderer sr = person.AddComponent<SpriteRenderer>();
         Person ps = person.AddComponent<Person>();
+        ps.transform.name = "Person";
+
         return person;
     }
 
@@ -37,10 +39,10 @@ public class PeopleGenerator : MonoBehaviour
             if(spawningPeople)
             { 
                 GameObject person = GeneratePerson();
-                peopleQ.Enqueue(person);
+                GameObject ourPerson = Instantiate(person);
+                peopleQ.Enqueue(ourPerson);
                 Debug.Log("Created a Person");
-                
-                // TODO: Instatiate the person
+
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
             }
             else
