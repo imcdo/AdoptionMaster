@@ -7,6 +7,7 @@ public class DogBehavior : MonoBehaviour
 {
     private Sequencer root;
     private Dog ds;
+    public bool grabbed = false;
 
     [Tooltip("an average action timer to base on, will add noise")]
     [SerializeField] float startActionInterval = 5;
@@ -28,8 +29,15 @@ public class DogBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        actionTimer += Time.deltaTime;
-        root.Update();
+        if(!grabbed) { 
+            actionTimer += Time.deltaTime;
+            root.Update();
+        } else
+        {
+            Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pz.z = 0;
+            transform.position = pz;
+        }
     }
 
     private void BuildTree()
