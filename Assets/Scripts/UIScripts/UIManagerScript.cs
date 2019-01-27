@@ -31,12 +31,16 @@ public class UIManagerScript : MonoBehaviour
 
     [HideInInspector] public Sprite[] peopleFaceSprites;
 
-    GameObject emotionImage;
+    private GameObject emotionImage;
 
+    Sprite[] emotions;
     void Start()
     {
-        emotionImage = humanCard.transform.GetChild(8).gameObject;
-        emotionImage.SetActive(true);
+        // emotionImage = GameObject.Find("EmotionImage");
+        emotionImage = GameObject.Find("EmotionImage");
+        //emotionImage.SetActive(false);
+        emotions = Resources.LoadAll<Sprite>("Emotions");
+        //emotionImage = humanCard.transform.parent.gameObject.GetComponentInChildren<Animator>().gameObject;
         var animalchildren = animalCard.GetComponentsInChildren<Text>();
         Debug.Assert(animalchildren.Length >= 7);
 
@@ -63,7 +67,7 @@ public class UIManagerScript : MonoBehaviour
 
         humanHeadImg = humanCard.transform.GetChild(0).GetComponent<Image>();
 
-        peopleFaceSprites= Resources.LoadAll<Sprite>("PeopleHeads");
+        peopleFaceSprites = Resources.LoadAll<Sprite>("PeopleHeads");
     }
 
     void Update()
@@ -75,15 +79,26 @@ public class UIManagerScript : MonoBehaviour
         if (diff <= 0.33f)
         {
             //show heart
+            emotionImage.GetComponent<Image>().sprite = emotions[0];
+            emotionImage.GetComponent<Animator>().SetTrigger("play");
+            //emotionImage.SetActive(true);
 
         }
         else if (diff <= 0.66f)
         {
             //show blah
+            emotionImage.GetComponent<Image>().sprite = emotions[1];
+            emotionImage.GetComponent<Animator>().SetTrigger("play");
+            //emotionImage.SetActive(true);
+
         }
         else
         {
             //show bad
+            emotionImage.GetComponent<Image>().sprite = emotions[2];
+            emotionImage.GetComponent<Animator>().SetTrigger("play");
+            //emotionImage.SetActive(true);
+
         }
     }
     public void OnAnimalUpdate(string breedTxt, string ageTxt, string allergiesTxt, 
