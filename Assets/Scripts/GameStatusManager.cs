@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class GameStatusManager : MonoBehaviour
 {
+    public QueueManager cuemanager;
+
     [HideInInspector] public float currentTime { get; private set; }
     [HideInInspector] public int score { get; set; }
 
@@ -23,7 +25,7 @@ public class GameStatusManager : MonoBehaviour
     public float dayLengthInSeconds = 50;
     [Tooltip("the distribution of people over the day")]
     public AnimationCurve peopleDistribution;
-    public float peoplePerNewDayModifier = 1.5f;
+    public float peoplePerNewDayModifier = .7f;
     [HideInInspector] public int dayNumber = 0;
 
     UIManagerScript uiman;
@@ -71,6 +73,7 @@ public class GameStatusManager : MonoBehaviour
     {
         uiman = FindObjectOfType<UIManagerScript>().GetComponent<UIManagerScript>();
         dg = FindObjectOfType<DogGenerator>().GetComponent<DogGenerator>();
+        cuemanager = FindObjectOfType<QueueManager>();
         currentTime = 0;
     }
 
@@ -90,9 +93,10 @@ public class GameStatusManager : MonoBehaviour
 
     public float DetermineWaitTime()
     {
+
         float fracDay = currentTime / dayLengthInSeconds;
-        var wait = dayLengthInSeconds * ( 1 - ((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
-        Debug.Log(wait + " waittime");
+        var wait = dayLengthInSeconds * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        Debug.Log("Wait time running " + wait);
         return wait;
     }
 
@@ -102,7 +106,7 @@ public class GameStatusManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Mouse Down");
-            Debug.Assert(grabedDog == null);
+    
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
             if(hit.transform != null) { 
@@ -143,6 +147,7 @@ public class GameStatusManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Debug.Log("Mouse Up");
+            uiman.OnAnimalReleased();
             // TODO: put dog in proper location
             if (grabedDog != null)
             {
@@ -162,13 +167,23 @@ public class GameStatusManager : MonoBehaviour
                 {
                     GameObject person = PeopleGenerator.peopleQ[0];
                     PeopleGenerator.peopleQ.RemoveAt(0);
-
+                    Debug.Log("REMOVE PEOPLE");
+                    cuemanager.RemoveFromQueue();
+                    uiman.OnPersonReleased();
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
                     money += (1 - dif) * maxPayment;
 
                     DogGenerator.Dogs.Remove(grabedDog);
                     Destroy(grabedDog);
                     dg.GenerateDog();
+
+                    //IF we JUST removed a person from the queue
+                    //show the next person's details in the UI IF count is NOT zero
+
+                    if(PeopleGenerator.peopleQ.Count != 0)
+                    {
+                        uiman.OnPersonUpdate();
+                    }
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {

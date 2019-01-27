@@ -59,7 +59,51 @@ public class DogBehavior : MonoBehaviour
         }
         else
         {
-            ds.Wander();
+            ds.transform.Translate(ds.moveDir * ds.moveSpeed * Time.deltaTime);
+            return Status.RUNNING;
+        }
+    }
+
+    Status Run()
+    {
+        if (actionTimer >= actionInterval)
+        {
+            ds.moveDir = Random.onUnitSphere;
+            actionInterval = startActionInterval + 1 - 2 * Random.value;
+            actionTimer = 0;
+            return Status.SUCCESS;
+        }
+        else
+        {
+            ds.transform.Translate(ds.moveDir * ds.runSpeed * Time.deltaTime);
+            return Status.RUNNING;
+        }
+    }
+
+    Status Sleep()
+    {
+        if (actionTimer >= actionInterval)
+        {
+            ds.moveDir = Random.onUnitSphere;
+            actionInterval = startActionInterval + 1 - 2 * Random.value;
+            actionTimer = 0;
+            return Status.SUCCESS;
+        }
+        else
+        
+            return Status.RUNNING;
+        }
+    Status Play()
+    {
+        if (actionTimer >= actionInterval)
+        {
+            ds.moveDir = Random.onUnitSphere;
+            actionInterval = startActionInterval + 1 - 2 * Random.value;
+            actionTimer = 0;
+            return Status.SUCCESS;
+        }
+        else
+        { 
             return Status.RUNNING;
         }
     }

@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PeopleGenerator : MonoBehaviour
 {
+    public QueueManager cuemanager;
+    public UIManagerScript uiManagerScript;
     public static List<GameObject> peopleQ;
     [HideInInspector] public bool spawningPeople { get; private set; } = true;
     GameStatusManager gm;
-    public static float maxPeopleQLength = 10;
+    public static float maxPeopleQLength = 5;
 
-    private void Awake()
+    private bool isFirstSpawn = true;
+
+    private void Start()
     {
         gm = FindObjectOfType<GameStatusManager>().GetComponent<GameStatusManager>();
 
+        uiManagerScript = FindObjectOfType<UIManagerScript>();
+
         Debug.Assert(peopleQ == null);
         peopleQ = new List<GameObject>();
+
+        cuemanager = FindObjectOfType<QueueManager>();
 
         StartCoroutine("PersonSpawner");
     }
@@ -27,7 +35,16 @@ public class PeopleGenerator : MonoBehaviour
         Person ps = person.AddComponent<Person>();
         stats.dogBreed = Stats.breed.Human;
         ps.transform.name = "Person";
+        
+        //IF the count of the queue is ZERO that means the VERY next person has to be show on the UI
+        if(peopleQ.Count == 0)
+        {
+            //call UI manager to show player card with info.
+            uiManagerScript.OnPersonUpdate();
+        }
+
         peopleQ.Add(person);
+        cuemanager.AddToQueue();
         return person;
     }
 
@@ -43,11 +60,24 @@ public class PeopleGenerator : MonoBehaviour
     {
         while (true)
         { 
-            if(peopleQ.Count >= maxPeopleQLength) { spawningPeople = false; }
-            else { spawningPeople = true; }
+            if(peopleQ.Count >= maxPeopleQLength)
+            { spawningPeople = false;
+            }else
+            { spawningPeople = true; }
+
             if(spawningPeople)
             {
-                GeneratePerson();
+                //remove the first immediate spawned person so that it lines up with the queue animation
+                if (isFirstSpawn)
+                {
+                    //do nothing
+                    isFirstSpawn = false;
+                }
+                else
+                {
+                    GeneratePerson();
+
+                }
 
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
             }

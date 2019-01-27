@@ -52,7 +52,8 @@ public class Dog : MonoBehaviour
     
     [Tooltip("Max dog moveSpeed")]
     [SerializeField] private float maxSpeed = 1;
-    private float moveSpeed;
+    public float moveSpeed = 3;
+    public float runSpeed = 6;
     [SerializeField] public Vector3 moveDir;
 
     // Start is called before the first frame update
@@ -73,7 +74,7 @@ public class Dog : MonoBehaviour
         familyText = SetStringCategory(familyCategories, familyRating);
         petsText = SetStringCategory(petCategories, petsRating);
 
-        Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
+        //Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
 
         stats = GetComponent<Stats>();
         anim = GetComponent<Animator>();
@@ -175,7 +176,7 @@ public class Dog : MonoBehaviour
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
         }
 
-        print(GetMoveDir(moveDir));
+        //print(GetMoveDir(moveDir));
         if (GetMoveDir(moveDir) == moveDirection.UP)
         {
             anim.SetBool("isMovingSide", false);
@@ -205,11 +206,6 @@ public class Dog : MonoBehaviour
         }
     }
 
-    // dog wander arround the screen
-    public void Wander()
-    {
-        transform.Translate(moveDir * moveSpeed * Time.deltaTime);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

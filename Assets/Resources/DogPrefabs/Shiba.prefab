@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 3192158361709524501}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8646ce763eb384448907d2317768e44a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b27f7c657f8c2f47afb4b7d55613ea3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed776ad3de08e446911876fcf31b6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  sr: {fileID: 0}
   allergyText: 
   breedText: 
   upKeepText: 
