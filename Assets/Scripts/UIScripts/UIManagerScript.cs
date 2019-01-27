@@ -29,7 +29,7 @@ public class UIManagerScript : MonoBehaviour
     [HideInInspector] public Text petText;
     public GameObject humanCard;
 
-    public Sprite[] peopleFaceSprites;
+    [HideInInspector] public Sprite[] peopleFaceSprites;
 
     void Start()
     {
@@ -58,6 +58,8 @@ public class UIManagerScript : MonoBehaviour
         petText = humanchildren[6];
 
         humanHeadImg = humanCard.transform.GetChild(0).GetComponent<Image>();
+
+        peopleFaceSprites= Resources.LoadAll<Sprite>("PeopleHeads");
     }
 
     void Update()
