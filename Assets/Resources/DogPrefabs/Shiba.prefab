@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc47975fd48cd442b393851255f470d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogBreed: 0
+  dogBreed: 1
 --- !u!212 &3532968130548845152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129,6 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed776ad3de08e446911876fcf31b6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allergyText: 
+  breedText: 
+  upKeepText: 
+  energyText: 
+  ageText: 
+  familyText: 
+  petsText: 
   maxSpeed: 1
   moveDir: {x: 0, y: 0, z: 0}
 --- !u!114 &3656785912675414181
