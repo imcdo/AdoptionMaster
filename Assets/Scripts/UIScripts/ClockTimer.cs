@@ -15,12 +15,14 @@ public class ClockTimer : MonoBehaviour
     private float currentTime;
     private Image clockImage;
     public UnityEngine.Sprite[] clock;
+    private bool dayEnded = false;
 
+    private FadeToBlack ftb;
     // Start is called before the first frame update
     void Start()
     {
         gsm = FindObjectOfType<GameStatusManager>();
-       
+        ftb = FindObjectOfType<FadeToBlack>();
         clockImage = GameObject.Find("ClockImage").GetComponent<Image>();
     }
 
@@ -35,10 +37,23 @@ public class ClockTimer : MonoBehaviour
         {
             clockImage.sprite = clock[idx];
         }
-        if (currentTime >= 1)
+        if (currentTime >= 1 && !dayEnded)
         {
-            currentTime = 0;
+            dayEnded = true;
             print("Day Ends");
+            ftb.FadeOut();
+            StartCoroutine(NextDay());
         }
+    }
+
+    IEnumerator NextDay()
+    {
+        yield return new WaitForSeconds(3);
+        // Wait 3 seconds before changing days
+        ftb.FadeIn();
+        currentTime = 0;
+        dayEnded = false;
+        Debug.Log("Next Day Begins");
+        
     }
 }
