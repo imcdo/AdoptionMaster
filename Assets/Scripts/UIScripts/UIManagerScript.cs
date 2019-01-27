@@ -33,8 +33,12 @@ public class UIManagerScript : MonoBehaviour
 
     GameObject emotionImage;
 
+    GameStatusManager gsm;
+
     void Start()
     {
+
+        gsm = FindObjectOfType<GameStatusManager>();
         emotionImage = humanCard.transform.GetChild(8).gameObject;
         emotionImage.SetActive(true);
         var animalchildren = animalCard.GetComponentsInChildren<Text>();
@@ -89,6 +93,7 @@ public class UIManagerScript : MonoBehaviour
     public void OnAnimalUpdate(string breedTxt, string ageTxt, string allergiesTxt, 
         string energyTxt, string maintenanceTxt, string familyFriendlyTxt, string petFriendlyTxt, Sprite dogSprite)
     {
+
         breedText.text = breedTxt;
         ageText.text = ageTxt;
         allergiesText.text = allergiesTxt;
@@ -99,11 +104,13 @@ public class UIManagerScript : MonoBehaviour
         animalCard.SetActive(true);
 
         animalHeadImg.sprite = dogSprite;
+        gsm.audioSrcs[0].Play();
     }
 
     public void OnAnimalReleased()
     {
         animalCard.SetActive(false);
+        gsm.audioSrcs[3].Play();
 
     }
 
@@ -124,10 +131,12 @@ public class UIManagerScript : MonoBehaviour
         petText.text = "Pet: " + person.petsText;
 
     humanCard.SetActive(true);
+        gsm.audioSrcs[0].Play();
     }
     public void OnPersonReleased()
     {
         humanCard.SetActive(false);
+        gsm.audioSrcs[3].Play();
     }
     
     public int AssignFaceToPerson()

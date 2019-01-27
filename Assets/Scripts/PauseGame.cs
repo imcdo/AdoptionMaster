@@ -6,10 +6,12 @@ public class PauseGame : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    private GameStatusManager gsm;
     // Start is called before the first frame update
     void Start()
     {
         pauseMenuUI.SetActive(false);
+        gsm = FindObjectOfType<GameStatusManager>();
     }
 
     // Update is called once per frame
@@ -19,10 +21,12 @@ public class PauseGame : MonoBehaviour
         {
             if (GameIsPaused)
             {
+                gsm.audioSrcs[6].Play();
                 Unpause();
             }
             else
             {
+                gsm.audioSrcs[6].Play();
                 Pause();
             }
         }

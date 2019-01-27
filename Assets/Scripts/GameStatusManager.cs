@@ -12,6 +12,8 @@ public class GameStatusManager : MonoBehaviour
     [HideInInspector] public float currentTime { get; private set; }
     [HideInInspector] public int score { get; set; }
 
+    [HideInInspector] public AudioSource[] audioSrcs;
+
     GameObject selectedDog;
     GameObject grabedDog;
 
@@ -47,6 +49,7 @@ public class GameStatusManager : MonoBehaviour
     private void Awake()
     {
         Camera main = Camera.main;
+        audioSrcs = GetComponents<AudioSource>();
 
         var topLeft = main.ViewportToWorldPoint(new Vector3(0, 0, 0));
         var bottomRight = main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0));
@@ -162,6 +165,7 @@ public class GameStatusManager : MonoBehaviour
             // TODO: put dog in proper location
             if (grabedDog != null)
             {
+                grabedDog.GetComponent<Dog>().audioSrcs[1].Play();
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Vector3 point = ray.GetPoint(0);
                 point.z = 0;

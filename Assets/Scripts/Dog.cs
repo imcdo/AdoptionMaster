@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dog : MonoBehaviour
 {
 
-    AudioSource[] audioSrcs;
+    [HideInInspector] public AudioSource[] audioSrcs;
 
     string[] energyCategories = { "Relaxed", "Moderate", "Hyper" };
     string[] breedCategories = { "Chow Chow", "Terreir", "Pomeranian", "Poodle", "Shiba", "Doberman", "Chihuahua" };

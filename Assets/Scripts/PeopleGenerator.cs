@@ -35,10 +35,12 @@ public class PeopleGenerator : MonoBehaviour
         Person ps = person.AddComponent<Person>();
         stats.dogBreed = Stats.breed.Human;
         ps.transform.name = "Person";
-        
+
+        gm.audioSrcs[2].Play();
         
 
         peopleQ.Add(person);
+        updateQPos();
         //cuemanager.AddToQueue();
 
         // IF the count of the queue is one that means the VERY next person has to be show on the UI
@@ -53,6 +55,14 @@ public class PeopleGenerator : MonoBehaviour
     //    peopleQ.Enqueue(ourPerson);
     //    return ourPerson;
     //}
+
+    public static void updateQPos()
+    {
+        for (int i =0; i < peopleQ.Count; i++)
+        {
+            // peopleQ[i].GetComponent<SpriteRenderer>().sortingOrder = -1 * i;
+        }
+    }
 
     IEnumerator PersonSpawner()
     {
