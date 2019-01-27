@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-    public enum breed { Shiba, Dober}
+    public enum breed { Human, Shiba, ChowChow, Terreir, Pomeranian, Poodle, Doberman, Chihuahua}
 
     public static Dictionary<breed, float> breedStatDict;
 
-    [SerializeField] breed dogBreed;
+    [SerializeField]  public breed dogBreed;
 
     [HideInInspector] public float alergy { get; private set; }
     [HideInInspector] public float fancy { get; private set; }
@@ -18,7 +18,14 @@ public class Stats : MonoBehaviour
     private void Start()
     {
         alergy = Random.value; 
-        fancy = (Random.value + breedStatDict[dogBreed]) / 2;
+        if(dogBreed == breed.Human)
+        {
+            fancy = Random.value;
+        }
+        else
+        {
+            fancy = (Random.value + breedStatDict[dogBreed]) / 2;
+        }
         energy = Random.value;
         sociality = Random.value;
 

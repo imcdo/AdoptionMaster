@@ -64,10 +64,7 @@ public class Person : MonoBehaviour
         Debug.Log(allergyText + " " + incomeText + " " + spaceText + " " + ageText + " " + energyText + " " + familyText + " " + petsText);
     }
 
-    void Update()
-    {
-        
-    }
+
     public string SetStringCategory(string [] category, float value)
     {
         if(value < 0.33)
@@ -114,12 +111,5 @@ public class Person : MonoBehaviour
         s1 = Mathf.Max(Mathf.Min(1, y), Mathf.Min(1, (x - y)));
         s2 = x - s1;
     }
-    /*
-     Animals
 
-    Allergy - Allergy
-    Fancy - breed & maintaincnence
-    Energy - Age & energy
-    Sociability - people friendly & pet friendly
-     */
 }

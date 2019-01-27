@@ -4,13 +4,51 @@ using UnityEngine;
 
 public class Dog : MonoBehaviour
 {
+    string[] energyCategories = { "Relaxed", "Moderate", "Hyper" };
+    string[] breedCategories = { "Chow Chow", "Terreir", "Pomeranian", "Poodle", "Shiba", "Doberman", "Chihuahua" };
+    string[] upKeepCategories = { "Economical", "Reasonable", "High Maintence" };
+    string[] allergyCategories = { "Hypoallergic", "Light Shedding", "Sheds" };
+    string[] familyCategories = { "Antisocial", "Accepting", "Loving" };
+    string[] petCategories = { "Introvert", "Average", "Friendly" };
+    string[] ageCategories = { "Puppy", "Dog", "Old Dog" };
 
     public Animator anim;
     public SpriteRenderer sr;
 
     public enum moveDirection { UP, DOWN, LEFT, RIGHT }
 
+    public string allergyText;
+    public string breedText;
+    public string upKeepText;
+    public string energyText;
+    public string ageText;
+    public string familyText;
+    public string petsText;
+
+    private int numSubCategory = 2;
+
+    private float allergyRating = 0;
+
+    private float breedRating = 0;
+    private float upKeepRating = 0;
+
+    private float ageRating = 0;
+    private float energyRating = 0;
+
+    private float familyRating = 0;
+    private float petsRating = 0;
+    /*
+        Animals
+
+        Allergy - Allergy
+        Fancy - breed & maintaincnence
+        Energy - Age & energy
+        Sociability - people friendly & pet friendly
+    */
+
+
     private Stats stats;
+    private GameStatusManager gameStatusManager;
     
     [Tooltip("Max dog moveSpeed")]
     [SerializeField] private float maxSpeed = 1;
@@ -20,6 +58,23 @@ public class Dog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stats = GetComponent<Stats>();
+        gameStatusManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStatusManager>();
+        //Get all information about the damn dogs.
+
+        GetSubValues(stats);
+        //Debug.Log("*********" +allergyRating + " " + breedRating + " " + upKeepRating + " " + ageRating + " "+ energyRating + " " + familyRating + " " + petsRating);
+
+        allergyText = SetStringCategory(allergyCategories, allergyRating);
+        breedText = stats.dogBreed.ToString();
+        upKeepText = SetStringCategory(upKeepCategories, upKeepRating);
+        energyText = SetStringCategory(energyCategories, energyRating);
+        ageText = SetStringCategory(ageCategories, ageRating);
+        familyText = SetStringCategory(familyCategories, familyRating);
+        petsText = SetStringCategory(petCategories, petsRating);
+
+        Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
+
         stats = GetComponent<Stats>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -32,6 +87,56 @@ public class Dog : MonoBehaviour
         moveDir = Random.onUnitSphere;
 
 
+    }
+
+    public string SetStringCategory(string[] category, float value)
+    {
+        if (value < 0.33)
+        {
+            return category[0];
+        }
+        else if (value < 0.66)
+        {
+            return category[1];
+        }
+        else
+        {
+            return category[2];
+        }
+    }
+
+    public void GetSubValues(Stats stats)
+    {
+
+        //get all 4 stats here and find the sub stats for each. 
+
+        allergyRating = stats.alergy;
+        //CalculateMath(stats.fancy, ref incomeRating, ref spaceRating);
+        CalculateMath(stats.energy, ref ageRating, ref energyRating);
+        CalculateMath(stats.sociality, ref familyRating, ref petsRating);
+
+        breedRating = Stats.breedStatDict[stats.dogBreed];
+        upKeepRating = ((stats.fancy * 2)) - breedRating;
+        /*
+         x = (2 * coreAt)
+         y = rand(0,x)
+         s1 = max(min(1,y), min(1, (#subsets - y)))
+         s2 = #sub - s1
+            */
+
+
+
+        //Debug.Log(gameObject.name + s1);
+        //Debug.Log(gameObject.name + s2);
+
+    }
+
+    private void CalculateMath(float coreAttribute, ref float s1, ref float s2)
+    {
+        float x = 2 * coreAttribute;
+        float y = Random.Range(0, x);
+        s1 = Mathf.Max(Mathf.Min(1, y), Mathf.Min(1, (x - y)));
+        s2 = x - s1;
     }
 
     private static moveDirection GetMoveDir(Vector3 vec)
