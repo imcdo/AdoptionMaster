@@ -35,6 +35,7 @@ public class GameStatusManager : MonoBehaviour
 
     private DogGenerator dg;
 
+
     private void Awake()
     {
         Camera main = Camera.main;
@@ -120,12 +121,22 @@ public class GameStatusManager : MonoBehaviour
                 }
 
                 Stats s = grabedDog.GetComponent<Stats>();
+                Dog d = grabedDog.GetComponent<Dog>();
                 if(s != null)
                 {
-                    uiman.animalAttribute1.text = "" + s.alergy;
-                    uiman.animalAttribute2.text = "" + s.fancy;
-                    uiman.animalAttribute3.text = "" + s.energy;
-                    uiman.animalAttribute4.text = "" + s.sociality;
+                    string breed, age, allergy, energy, maintenance, family, pet;
+
+                    breed = "Breed: " + d.breedText;
+                    age = "Age: " + d.ageText;
+                    allergy = "Allergies: " + d.allergyText;
+                    energy = "Energy: " + d.energyText;
+                    maintenance = "Maintenance: " + d.upKeepText;
+                    family = "Family Friendly: " + d.familyText;
+                    pet = "Pet Friendly: " + d.petsText;
+
+                    uiman.OnAnimalUpdate(breed, age, allergy, energy,
+                        maintenance, family, pet);
+
                 }
             }
         }
