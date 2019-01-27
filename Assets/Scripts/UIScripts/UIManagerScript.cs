@@ -40,10 +40,10 @@ public class UIManagerScript : MonoBehaviour
         Stats person = PeopleGenerator.peopleQ.Peek().GetComponent<Stats>();
 
         //string name = gameObject.transform.name;
-        Debug.Log(person.alergy);
-        Debug.Log(person.fancy);
-        Debug.Log(person.energy);
-        Debug.Log(person.sociality);
+        //Debug.Log(person.alergy);
+        //Debug.Log(person.fancy);
+        //Debug.Log(person.energy);
+        //Debug.Log(person.sociality);
 
         personAttribute1.text = person.alergy.ToString();
         personAttribute2.text = person.fancy.ToString();

@@ -8,7 +8,7 @@ public class DogGenerator : MonoBehaviour
 {
     public static List<GameObject> Dogs;
 
-    Sprite[] Sprites;
+    GameObject[] DogPrefabs;
 
     [Tooltip("number of dogs at the begining of the game")]
     [SerializeField] private int numberOfStartingDogs = 10;
@@ -16,9 +16,9 @@ public class DogGenerator : MonoBehaviour
     private void Awake()
     {
         Dogs = new List<GameObject>();
-        Sprites = Resources.LoadAll<Sprite>("DogSprites");
-        Debug.Assert(Sprites != null);
-
+        DogPrefabs = Resources.LoadAll<GameObject>("DogPrefabs");
+        Debug.Assert(DogPrefabs != null);
+        
     }
     
     private void Start()
@@ -33,19 +33,18 @@ public class DogGenerator : MonoBehaviour
     {
         
         Random spriteSelector = new Random();
-        GameObject dog = new GameObject();
-        Stats stats = dog.AddComponent<Stats>();
-        SpriteRenderer sr = dog.AddComponent<SpriteRenderer>();
-        sr.sprite = Sprites[Random.Range(0, Sprites.Length)];
-        Dog ds = dog.AddComponent<Dog>();
-        DogBehavior db = dog.AddComponent<DogBehavior>();
-        dog.transform.name = "Dog";
-        BoxCollider2D bc = dog.AddComponent<BoxCollider2D>();
-        bc.isTrigger = true;
-        Rigidbody2D rb = dog.AddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 0;
-        rb.freezeRotation = true;
+        GameObject dog = Instantiate(DogPrefabs[Random.Range(0, DogPrefabs.Length)]);
+        // Stats stats = dog.AddComponent<Stats>();
+        // SpriteRenderer sr = dog.AddComponent<SpriteRenderer>();
+        // Dog ds = dog.AddComponent<Dog>();
+        // DogBehavior db = dog.AddComponent<DogBehavior>();
+        // dog.transform.name = "Dog";
+        // BoxCollider2D bc = dog.AddComponent<BoxCollider2D>();
+        // bc.isTrigger = true;
+        // Rigidbody2D rb = dog.AddComponent<Rigidbody2D>();
+        // rb.bodyType = RigidbodyType2D.Dynamic;
+        // rb.gravityScale = 0;
+        // rb.freezeRotation = true;
         dog.transform.position = new Vector3(Random.Range(GameStatusManager.maxX, GameStatusManager.minX), Random.Range(GameStatusManager.maxY, GameStatusManager.minY), 0);
         gameObject.layer = LayerMask.NameToLayer("Animals");
 
