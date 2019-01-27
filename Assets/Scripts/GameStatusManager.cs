@@ -182,6 +182,9 @@ public class GameStatusManager : MonoBehaviour
                     cuemanager.RemoveFromQueue();
                     uiman.OnPersonReleased();
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
+
+                    ShowUIAnimation(dif);
+
                     money += (1 - dif) * maxPayment;
 
                     DogGenerator.Dogs.Remove(grabedDog);
@@ -205,6 +208,10 @@ public class GameStatusManager : MonoBehaviour
             }
             grabedDog = null;
         }
+    }
+
+    private void ShowUIAnimation(float diff) {
+        uiman.EmotionAnimation(diff);
     }
 
     public void DayStart()

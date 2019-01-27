@@ -31,8 +31,12 @@ public class UIManagerScript : MonoBehaviour
 
     [HideInInspector] public Sprite[] peopleFaceSprites;
 
+    GameObject emotionImage;
+
     void Start()
     {
+        emotionImage = humanCard.transform.GetChild(8).gameObject;
+        emotionImage.SetActive(true);
         var animalchildren = animalCard.GetComponentsInChildren<Text>();
         Debug.Assert(animalchildren.Length >= 7);
 
@@ -66,7 +70,22 @@ public class UIManagerScript : MonoBehaviour
     {
         
     }
+    public void EmotionAnimation(float diff)
+    {
+        if (diff <= 0.33f)
+        {
+            //show heart
 
+        }
+        else if (diff <= 0.66f)
+        {
+            //show blah
+        }
+        else
+        {
+            //show bad
+        }
+    }
     public void OnAnimalUpdate(string breedTxt, string ageTxt, string allergiesTxt, 
         string energyTxt, string maintenanceTxt, string familyFriendlyTxt, string petFriendlyTxt, Sprite dogSprite)
     {
