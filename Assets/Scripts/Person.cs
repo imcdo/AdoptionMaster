@@ -47,7 +47,7 @@ public class Person : MonoBehaviour
     void Start()
     {
         personStats = GetComponent<Stats>();
-
+        Debug.Log("new person spawned");
        // Debug.Log(gameObject.name + personStats.fancy);
         GetSubValues(personStats);
 
@@ -61,7 +61,8 @@ public class Person : MonoBehaviour
         familyText = SetStringCategory(familyCategories, familyRating);
         petsText = SetStringCategory(petsCategories, petsRating);
 
-        Debug.Log(allergyText + " " + incomeText + " " + spaceText + " " + ageText + " " + energyText + " " + familyText + " " + petsText);
+        // Debug.Log(allergyText + " " + incomeText + " " + spaceText + " " + ageText + " " + energyText + " " + familyText + " " + petsText);
+
     }
 
 
