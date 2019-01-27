@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pom_Controller
+  m_Name: Chiua_Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isMovingDown
@@ -233,7 +233,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 915f148c0a3d6fb4e924ace5633e4160, type: 2}
+  m_Motion: {fileID: 7400000, guid: d3f7fa0ea0121764ba64c7739e2452aa, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -262,7 +262,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ec169d2bb92031c4a8dd7d790b86a994, type: 2}
+  m_Motion: {fileID: 7400000, guid: 81522d664043c12489d48ac44fbdee33, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -289,7 +289,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e17f28dd4b5400f409d2e26280e9891c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 96407a994d07dd04081f232ee152623a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -316,7 +316,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8d56724ddc98326418274d98cbc3340b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9ee2714ea282e2344ac690fd5d472c5b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
