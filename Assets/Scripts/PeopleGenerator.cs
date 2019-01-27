@@ -22,7 +22,7 @@ public class PeopleGenerator : MonoBehaviour
         Debug.Assert(peopleQ == null);
         peopleQ = new List<GameObject>();
 
-        
+        cuemanager = FindObjectOfType<QueueManager>();
 
         StartCoroutine("PersonSpawner");
     }

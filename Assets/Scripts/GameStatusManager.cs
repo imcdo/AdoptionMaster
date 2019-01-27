@@ -25,7 +25,7 @@ public class GameStatusManager : MonoBehaviour
     public float dayLengthInSeconds = 50;
     [Tooltip("the distribution of people over the day")]
     public AnimationCurve peopleDistribution;
-    public float peoplePerNewDayModifier = 1.5f;
+    public float peoplePerNewDayModifier = .7f;
     [HideInInspector] public int dayNumber = 0;
 
     UIManagerScript uiman;
@@ -73,6 +73,7 @@ public class GameStatusManager : MonoBehaviour
     {
         uiman = FindObjectOfType<UIManagerScript>().GetComponent<UIManagerScript>();
         dg = FindObjectOfType<DogGenerator>().GetComponent<DogGenerator>();
+        cuemanager = FindObjectOfType<QueueManager>();
         currentTime = 0;
     }
 
@@ -94,8 +95,8 @@ public class GameStatusManager : MonoBehaviour
     {
 
         float fracDay = currentTime / dayLengthInSeconds;
-        var wait = dayLengthInSeconds * ( 1 - ((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
-        Debug.Log("Wait time running");
+        var wait = dayLengthInSeconds * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        Debug.Log("Wait time running " + wait);
         return wait;
     }
 
