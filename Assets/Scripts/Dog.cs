@@ -73,7 +73,7 @@ public class Dog : MonoBehaviour
         familyText = SetStringCategory(familyCategories, familyRating);
         petsText = SetStringCategory(petCategories, petsRating);
 
-        Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
+        //Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
 
         stats = GetComponent<Stats>();
         anim = GetComponent<Animator>();
@@ -175,7 +175,7 @@ public class Dog : MonoBehaviour
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
         }
 
-        print(GetMoveDir(moveDir));
+        //print(GetMoveDir(moveDir));
         if (GetMoveDir(moveDir) == moveDirection.UP)
         {
             anim.SetBool("isMovingSide", false);

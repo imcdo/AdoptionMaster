@@ -2362,6 +2362,16 @@ MonoBehaviour:
   maintenanceText: {fileID: 102288881}
   familyFriendlyText: {fileID: 827445043}
   petFriendlyText: {fileID: 1784348484}
+  animalCard: {fileID: 1190612930}
+  humanHeadImg: {fileID: 321393179}
+  ageTextHuman: {fileID: 2069239824}
+  incomeText: {fileID: 947557012}
+  energyTextHuman: {fileID: 37217849}
+  allergiesTextHuman: {fileID: 1733512096}
+  spaceText: {fileID: 705917848}
+  familyext: {fileID: 601520232}
+  petText: {fileID: 720167556}
+  humanCard: {fileID: 1961974237}
 --- !u!4 &1095876559
 Transform:
   m_ObjectHideFlags: 0
@@ -2664,6 +2674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddf643d9dc0976409361365325d6609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cuemanager: {fileID: 1783641108}
+  uiManagerScript: {fileID: 1095876558}
 --- !u!114 &1189724340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2676,6 +2688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512177024e15d4347a930c8d665348a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cuemanager: {fileID: 1783641108}
   startDay: 8
   endDay: 20
   daySpeed: 1
@@ -2740,7 +2753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1190612931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3878,7 +3891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1961974238
 RectTransform:
   m_ObjectHideFlags: 0

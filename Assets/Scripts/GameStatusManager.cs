@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class GameStatusManager : MonoBehaviour
 {
+    public QueueManager cuemanager;
+
     [HideInInspector] public float currentTime { get; private set; }
     [HideInInspector] public int score { get; set; }
 
@@ -90,9 +92,10 @@ public class GameStatusManager : MonoBehaviour
 
     public float DetermineWaitTime()
     {
+
         float fracDay = currentTime / dayLengthInSeconds;
         var wait = dayLengthInSeconds * ( 1 - ((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
-        Debug.Log(wait + " waittime");
+        Debug.Log("Wait time running");
         return wait;
     }
 
@@ -143,6 +146,7 @@ public class GameStatusManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Debug.Log("Mouse Up");
+            uiman.OnAnimalReleased();
             // TODO: put dog in proper location
             if (grabedDog != null)
             {
@@ -162,13 +166,23 @@ public class GameStatusManager : MonoBehaviour
                 {
                     GameObject person = PeopleGenerator.peopleQ[0];
                     PeopleGenerator.peopleQ.RemoveAt(0);
-
+                    Debug.Log("REMOVE PEOPLE");
+                    cuemanager.RemoveFromQueue();
+                    uiman.OnPersonReleased();
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
                     money += (1 - dif) * maxPayment;
 
                     DogGenerator.Dogs.Remove(grabedDog);
                     Destroy(grabedDog);
                     dg.GenerateDog();
+
+                    //IF we JUST removed a person from the queue
+                    //show the next person's details in the UI IF count is NOT zero
+
+                    if(PeopleGenerator.peopleQ.Count != 0)
+                    {
+                        uiman.OnPersonUpdate();
+                    }
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {

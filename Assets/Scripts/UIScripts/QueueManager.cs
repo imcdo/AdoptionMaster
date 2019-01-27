@@ -19,8 +19,9 @@ public class QueueManager : MonoBehaviour
     private bool isFull;
     private bool isEmpty;
 
-    private void Start()
+    private void Awake()
     {
+        addTemp = new GameObject();
         waitingLine = new Queue<GameObject>();
         queueCounter = 0;
         isFull = false;
