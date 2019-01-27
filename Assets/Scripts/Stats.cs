@@ -29,6 +29,7 @@ public class Stats : MonoBehaviour
         energy = Random.value;
         sociality = Random.value;
 
+    
         // printData();
     }
 

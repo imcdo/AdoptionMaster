@@ -29,6 +29,7 @@ public class UIManagerScript : MonoBehaviour
     [HideInInspector] public Text petText;
     public GameObject humanCard;
 
+    [HideInInspector] public Sprite[] peopleFaceSprites;
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class UIManagerScript : MonoBehaviour
         familyFriendlyText = animalchildren[5];
         petFriendlyText = animalchildren[6];
 
-        animalHeadImg = animalCard.GetComponentInChildren<Image>();
+        animalHeadImg = animalCard.transform.GetChild(0).GetComponent<Image>();
 
         var humanchildren = humanCard.GetComponentsInChildren<Text>();
         Debug.Assert(humanchildren.Length >= 7);
@@ -56,8 +57,10 @@ public class UIManagerScript : MonoBehaviour
         familyext = humanchildren[5];
         petText = humanchildren[6];
 
-        humanHeadImg = humanCard.GetComponentInChildren<Image>();
-}
+        humanHeadImg = humanCard.transform.GetChild(0).GetComponent<Image>();
+
+        peopleFaceSprites= Resources.LoadAll<Sprite>("PeopleHeads");
+    }
 
     void Update()
     {
@@ -65,7 +68,7 @@ public class UIManagerScript : MonoBehaviour
     }
 
     public void OnAnimalUpdate(string breedTxt, string ageTxt, string allergiesTxt, 
-        string energyTxt, string maintenanceTxt, string familyFriendlyTxt, string petFriendlyTxt)
+        string energyTxt, string maintenanceTxt, string familyFriendlyTxt, string petFriendlyTxt, Sprite dogSprite)
     {
         breedText.text = breedTxt;
         ageText.text = ageTxt;
@@ -75,6 +78,8 @@ public class UIManagerScript : MonoBehaviour
         familyFriendlyText.text = familyFriendlyTxt;
         petFriendlyText.text = petFriendlyTxt;
         animalCard.SetActive(true);
+
+        animalHeadImg.sprite = dogSprite;
     }
 
     public void OnAnimalReleased()
@@ -85,12 +90,30 @@ public class UIManagerScript : MonoBehaviour
 
     public void OnPersonUpdate()
     {
-        //Stats person = PeopleGenerator.peopleQ[0].GetComponent<Stats>();
-        humanCard.SetActive(true);
+        //Stats personStats = PeopleGenerator.peopleQ[0].GetComponent<Stats>();
+        Person person = PeopleGenerator.peopleQ[0].GetComponent<Person>();
+        humanHeadImg.sprite= peopleFaceSprites [person.spriteIndex];
+
+        //set all the text
+
+        ageTextHuman.text = "Age: " + person.ageText;
+        incomeText.text = "Income: "+ person.incomeText;
+        energyTextHuman.text = "Energy: " + person.energyText;
+        allergiesTextHuman.text = "Allergies: " + person.allergyText;
+        spaceText.text= "Space: " + person.spaceText;
+        familyext.text = "Family: " + person.familyText;
+        petText.text = "Pet: " + person.petsText;
+
+    humanCard.SetActive(true);
     }
     public void OnPersonReleased()
     {
         humanCard.SetActive(false);
     }
     
+    public int AssignFaceToPerson()
+    {
+        int randomIndex = Random.Range(0, 6);
+        return randomIndex;
+    }
 }

@@ -10,7 +10,7 @@ public class Dog : MonoBehaviour
     string[] allergyCategories = { "Hypoallergic", "Light Shedding", "Sheds" };
     string[] familyCategories = { "Antisocial", "Accepting", "Loving" };
     string[] petCategories = { "Introvert", "Average", "Friendly" };
-    string[] ageCategories = { "Puppy", "Dog", "Old Dog" };
+    string[] ageCategories = { "Puppy", "Mid-Life", "Old Dog" };
 
     public Animator anim;
     public SpriteRenderer sr;

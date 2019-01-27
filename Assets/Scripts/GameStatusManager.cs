@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 using UnityEngine.EventSystems;
 
 public class GameStatusManager : MonoBehaviour
@@ -22,7 +24,11 @@ public class GameStatusManager : MonoBehaviour
     public float startDay = 8;
     public float endDay = 20;
     public float daySpeed = 1;
-    public float dayLengthInSeconds = 50;
+    public float dayLengthInSeconds = 90;
+
+    public int numDaysPerRentPayment = 3;
+    public float rentAmount = 3150;
+
     [Tooltip("the distribution of people over the day")]
     public AnimationCurve peopleDistribution;
     public float peoplePerNewDayModifier = .7f;
@@ -87,6 +93,7 @@ public class GameStatusManager : MonoBehaviour
             currentTime = 0;
             dayNumber++;
             print("Day Ends");
+            DayStart();
         }
         MouseInteractions();
     }
@@ -95,7 +102,7 @@ public class GameStatusManager : MonoBehaviour
     {
 
         float fracDay = currentTime / dayLengthInSeconds;
-        var wait = dayLengthInSeconds * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        var wait = (dayLengthInSeconds  * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f))) / 2;
         Debug.Log("Wait time running " + wait);
         return wait;
     }
@@ -138,8 +145,12 @@ public class GameStatusManager : MonoBehaviour
                     family = "Family Friendly: " + d.familyText;
                     pet = "Pet Friendly: " + d.petsText;
 
+
+                    Sprite dogImage = d.GetComponent<SpriteRenderer>().sprite;
+                    Debug.Log("Sprite to be rendered name is " + dogImage.name);
+
                     uiman.OnAnimalUpdate(breed, age, allergy, energy,
-                        maintenance, family, pet);
+                        maintenance, family, pet, dogImage);
 
                 }
             }
@@ -175,7 +186,6 @@ public class GameStatusManager : MonoBehaviour
 
                     DogGenerator.Dogs.Remove(grabedDog);
                     Destroy(grabedDog);
-                    dg.GenerateDog();
 
                     //IF we JUST removed a person from the queue
                     //show the next person's details in the UI IF count is NOT zero
@@ -187,11 +197,25 @@ public class GameStatusManager : MonoBehaviour
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {
-                    grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
+                    if (grabedDog.transform.position.y < minY) { 
+                        grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
+                    }
                 }
 
             }
             grabedDog = null;
         }
+    }
+
+    public void DayStart()
+    {
+        DogGenerator.RefillDogs();
+        int numInQ = PeopleGenerator.peopleQ.Count;
+
+        PeopleGenerator.peopleQ.Clear();
+
+        for (int i = 0; i < numInQ; i++) cuemanager.RemoveFromQueue();
+
+        if (dayNumber % numDaysPerRentPayment == 0 && dayNumber != 0) money -= rentAmount; 
     }
 }
