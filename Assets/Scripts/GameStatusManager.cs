@@ -209,5 +209,6 @@ public class GameStatusManager : MonoBehaviour
         PeopleGenerator.peopleQ.Clear();
 
         for (int i = 0; i < numInQ; i++) cuemanager.RemoveFromQueue();
+        uiman.OnPersonReleased();
     }
 }

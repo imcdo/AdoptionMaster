@@ -19,8 +19,11 @@ public class QueueManager : MonoBehaviour
     private bool isFull;
     private bool isEmpty;
 
+    private GameObject[] playerPrefabs;
+
     private void Awake()
     {
+        playerPrefabs = Resources.LoadAll<GameObject>("PeoplePrefabs");
         addTemp = new GameObject();
         waitingLine = new Queue<GameObject>();
         queueCounter = 0;
@@ -33,7 +36,7 @@ public class QueueManager : MonoBehaviour
         
     }
 
-    public void AddToQueue()
+    public void AddToQueue(int playerIndex)
     {
         if (!isFull)
         {
@@ -41,7 +44,7 @@ public class QueueManager : MonoBehaviour
 
             //addTemp.AddComponent<QueueMovement>();
 
-            addTemp = Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            addTemp = Instantiate(playerPrefabs[playerIndex], spawnPoint.transform.position, spawnPoint.transform.rotation);
             addTemp.GetComponent<PlayerMovement>().target = queuePoints[queueCounter].transform.position;
             //addTemp.GetComponent<QueueMovement>().Target = queuePoints[queueCounter].transform;
 

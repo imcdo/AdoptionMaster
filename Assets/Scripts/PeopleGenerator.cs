@@ -39,7 +39,7 @@ public class PeopleGenerator : MonoBehaviour
         
 
         peopleQ.Add(person);
-        cuemanager.AddToQueue();
+        //cuemanager.AddToQueue();
 
         // IF the count of the queue is one that means the VERY next person has to be show on the UI
   
