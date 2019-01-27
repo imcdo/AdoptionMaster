@@ -197,7 +197,9 @@ public class GameStatusManager : MonoBehaviour
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {
-                    grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
+                    if (grabedDog.transform.position.y < minY) { 
+                        grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
+                    }
                 }
 
             }
