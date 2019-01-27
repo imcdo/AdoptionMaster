@@ -11,7 +11,7 @@ public class DogGenerator : MonoBehaviour
     GameObject[] DogPrefabs;
 
     [Tooltip("number of dogs at the begining of the game")]
-    [SerializeField] private int numberOfStartingDogs = 10;
+    [SerializeField] private int numberOfStartingDogs = 5;
 
     private void Awake()
     {

@@ -40,6 +40,12 @@ public class GameStatusManager : MonoBehaviour
 
         Debug.Log(topLeft + " " + bottomRight);
         Debug.Log(minX + " " + maxX + " " + minY + " " + maxY);
+
+        Stats.breedStatDict = new Dictionary<Stats.breed, float>()
+        {
+            {Stats.breed.Shiba , 0.4f},
+            {Stats.breed.Dober , 0.6f}
+        };
     }
 
     // Start is called before the first frame update
