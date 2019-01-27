@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DogGenerator : MonoBehaviour
 {
-    static List<GameObject> Dogs;
+    public static List<GameObject> Dogs;
 
     Sprite[] Sprites;
 
@@ -19,18 +19,19 @@ public class DogGenerator : MonoBehaviour
         Sprites = Resources.LoadAll<Sprite>("DogSprites");
         Debug.Assert(Sprites != null);
 
+    }
+    
+    private void Start()
+    {
         for (int i = 0; i < numberOfStartingDogs; i++)
         {
-            SpawnDog();
+            GenerateDog();
         }
-
     }
 
     public GameObject GenerateDog()
     {
-        Debug.Log(LayerMask.NameToLayer("Animals"));
-        gameObject.layer = LayerMask.NameToLayer("Animals");
-        Debug.Log("layer : " + gameObject.layer);
+        
         Random spriteSelector = new Random();
         GameObject dog = new GameObject();
         Stats stats = dog.AddComponent<Stats>();
@@ -45,19 +46,11 @@ public class DogGenerator : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 0;
         rb.freezeRotation = true;
+        dog.transform.position = new Vector3(Random.Range(GameStatusManager.maxX, GameStatusManager.minX), Random.Range(GameStatusManager.maxY, GameStatusManager.minY), 0);
+        gameObject.layer = LayerMask.NameToLayer("Animals");
 
+        Dogs.Add(dog);
         return dog;
-    }
-
-    public GameObject SpawnDog()
-    {
-        GameObject dog = GenerateDog();
-        // Instatiate the game object
-        GameObject ourDog = Instantiate(dog);
-
-        // add the instantiated game object to the list
-        Dogs.Add(ourDog);
-        return ourDog;
     }
 }
 

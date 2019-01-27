@@ -6,35 +6,19 @@ public class Dog : MonoBehaviour
 {
     enum moveDirection { UP, DOWN, LEFT, RIGHT }
 
-    float maxX;
-    float minX;
-    float maxY;
-    float minY;
+   
 
     private Stats stats;
     
     [Tooltip("Max dog moveSpeed")]
-    [SerializeField] private float maxSpeed = 0.5f;
+    [SerializeField] private float maxSpeed = 1;
     private float moveSpeed;
     [SerializeField] public Vector3 moveDir;
 
     // Start is called before the first frame update
     void Start()
     {
-        stats = GetComponent<Stats>();
-
-        Camera main = Camera.main;
-
-        var topLeft = main.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        var bottomRight = main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0));
-
-        minX = topLeft.x;
-        maxX = bottomRight.x;
-
-        minY = bottomRight.y;
-        maxY = topLeft.y;
-
-        Debug.Log(minX + " " + maxX + " " + minY + " " + maxY);
+        stats = GetComponent<Stats>();        
 
         // determine moveSpeed for the dog
         moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
@@ -65,21 +49,25 @@ public class Dog : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
-        if(pos.x <= minX && moveDir.x < 0)
+        if(pos.x <= GameStatusManager.minX && moveDir.x < 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.right);
+            Debug.Log("trip");
         }
-        if (pos.x >= maxX && moveDir.x > 0)
+        if (pos.x >= GameStatusManager.maxX && moveDir.x > 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.left);
+            Debug.Log("trip");
         }
-        if (pos.y <= minY && moveDir.y < 0)
+        if (pos.y <= GameStatusManager.minY && moveDir.y < 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.up);
+            Debug.Log("trip");
         } 
-        if (pos.y <= minY && moveDir.y > 0)
+        if (pos.y >= GameStatusManager.maxY && moveDir.y > 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
+            Debug.Log("tripy+");
         }
     }
 
