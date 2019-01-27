@@ -25,7 +25,7 @@ public class DogBehavior : MonoBehaviour
 
         BuildTree();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
