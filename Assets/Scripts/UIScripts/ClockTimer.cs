@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ClockTimer : MonoBehaviour
 {
+    private GameStatusManager gsm;
+
     public float startDay = 8;
     public float endDay = 20;
     public float daySpeed = 1;
@@ -17,7 +19,8 @@ public class ClockTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = 0;
+        gsm = FindObjectOfType<GameStatusManager>();
+       
         clockImage = GameObject.Find("ClockImage").GetComponent<Image>();
     }
 
