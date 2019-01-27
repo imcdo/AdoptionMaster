@@ -182,6 +182,9 @@ public class GameStatusManager : MonoBehaviour
                     cuemanager.RemoveFromQueue();
                     uiman.OnPersonReleased();
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
+
+                    ShowUIAnimation(dif);
+
                     money += (1 - dif) * maxPayment;
 
                     DogGenerator.Dogs.Remove(grabedDog);
@@ -207,6 +210,10 @@ public class GameStatusManager : MonoBehaviour
         }
     }
 
+    private void ShowUIAnimation(float diff) {
+        uiman.EmotionAnimation(diff);
+    }
+
     public void DayStart()
     {
         DogGenerator.RefillDogs();
@@ -215,7 +222,7 @@ public class GameStatusManager : MonoBehaviour
         PeopleGenerator.peopleQ.Clear();
 
         for (int i = 0; i < numInQ; i++) cuemanager.RemoveFromQueue();
-
-        if (dayNumber % numDaysPerRentPayment == 0 && dayNumber != 0) money -= rentAmount; 
+        uiman.OnPersonReleased();
+        if (dayNumber % numDaysPerRentPayment == 0 && dayNumber != 0) money -= rentAmount;
     }
 }

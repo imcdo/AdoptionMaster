@@ -71,6 +71,9 @@ public class Person : MonoBehaviour
             //call UI manager to show player card with info.
             FindObjectOfType<UIManagerScript>().OnPersonUpdate();
         }
+
+        FindObjectOfType<QueueManager>().AddToQueue(spriteIndex);
+
     }
 
 
