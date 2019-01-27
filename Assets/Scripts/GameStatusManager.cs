@@ -87,6 +87,7 @@ public class GameStatusManager : MonoBehaviour
             currentTime = 0;
             dayNumber++;
             print("Day Ends");
+            DayStart();
         }
         MouseInteractions();
     }
@@ -175,7 +176,6 @@ public class GameStatusManager : MonoBehaviour
 
                     DogGenerator.Dogs.Remove(grabedDog);
                     Destroy(grabedDog);
-                    dg.GenerateDog();
 
                     //IF we JUST removed a person from the queue
                     //show the next person's details in the UI IF count is NOT zero
@@ -193,5 +193,15 @@ public class GameStatusManager : MonoBehaviour
             }
             grabedDog = null;
         }
+    }
+
+    public void DayStart()
+    {
+        DogGenerator.RefillDogs();
+        int numInQ = PeopleGenerator.peopleQ.Count;
+
+        PeopleGenerator.peopleQ.Clear();
+
+        for (int i = 0; i < numInQ; i++) cuemanager.RemoveFromQueue();
     }
 }

@@ -51,5 +51,14 @@ public class DogGenerator : MonoBehaviour
         Dogs.Add(dog);
         return dog;
     }
+
+    public static void RefillDogs()
+    {
+        DogGenerator dg = FindObjectOfType<DogGenerator>();
+        while(Dogs.Count < dg.numberOfStartingDogs)
+        {
+            dg.GenerateDog();
+        }
+    }
 }
 
