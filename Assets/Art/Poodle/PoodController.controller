@@ -233,7 +233,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 29a97835edb8e574f84be31061c4dca5, type: 2}
+  m_Motion: {fileID: 7400000, guid: d82ca290d1c2fc2409db450ac8cbbb64, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -262,7 +262,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7c56d389b1af58148a815e5392f1706b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 51ee92cd1c64d104ba0a8f71001944ca, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -289,7 +289,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 99b32a39e7eb8c2469d2c783d0cce1f0, type: 2}
+  m_Motion: {fileID: 7400000, guid: b23062e14db741d42b18d4c8784ac4ac, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -316,7 +316,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2f5ae94916b810240916ed86cdb5912c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3ac7fc1889b86854dbeba1b7f815bbda, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -333,16 +333,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102207757096828400}
-    m_Position: {x: 264, y: 144, z: 0}
+    m_Position: {x: 252, y: 144, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102949428759353662}
-    m_Position: {x: 684, y: 144, z: 0}
+    m_Position: {x: 504, y: 156, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102834236203151038}
-    m_Position: {x: 408, y: 288, z: 0}
+    m_Position: {x: 264, y: 216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102050524638740100}
-    m_Position: {x: 396, y: 12, z: 0}
+    m_Position: {x: 264, y: 72, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
