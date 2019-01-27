@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Dog : MonoBehaviour
 {
-    enum moveDirection { UP, DOWN, LEFT, RIGHT }
+
+
+    public enum moveDirection { UP, DOWN, LEFT, RIGHT }
 
    
 

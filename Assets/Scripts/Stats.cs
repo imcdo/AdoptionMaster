@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+    public enum breed { Shiba, Dober}
+
+    public static Dictionary<breed, float> breedStatDict;
+
+    [SerializeField] breed dogBreed;
+
     [HideInInspector] public float alergy { get; private set; }
     [HideInInspector] public float fancy { get; private set; }
     [HideInInspector] public float energy { get; private set; }
     [HideInInspector] public float sociality { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         alergy = Random.value; 
-        fancy = Random.value;
+        fancy = (Random.value + breedStatDict[dogBreed]) / 2;
         energy = Random.value;
         sociality = Random.value;
 
