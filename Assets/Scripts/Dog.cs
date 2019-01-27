@@ -12,6 +12,7 @@ public class Dog : MonoBehaviour
     string[] petCategories = { "Introvert", "Average", "Friendly" };
     string[] ageCategories = { "Puppy", "Dog", "Old Dog" };
 
+    public Animator anim;
     public enum moveDirection { UP, DOWN, LEFT, RIGHT }
 
     public string allergyText;
@@ -72,8 +73,11 @@ public class Dog : MonoBehaviour
 
         Debug.Log(allergyText + " " + breedText + " " + upKeepText + " " + energyText + " " + ageText + " " + familyText + " " + petsText);
 
-    // determine moveSpeed for the dog
-    moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
+        stats = GetComponent<Stats>();
+        anim = GetComponent<Animator>();
+
+        // determine moveSpeed for the dog
+        moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
         Debug.Assert(moveSpeed < maxSpeed);
 
         // give a random init move direction
@@ -170,6 +174,19 @@ public class Dog : MonoBehaviour
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
             Debug.Log("tripy+");
+        }
+
+        print(GetMoveDir(moveDir));
+        if (GetMoveDir(moveDir) == moveDirection.UP)
+        {
+            anim.SetBool("isMovingDown", false);
+            anim.SetBool("isMovingUp", true);
+        }
+        else if (GetMoveDir(moveDir) == moveDirection.DOWN)
+        {
+            anim.SetBool("isMovingUp", false);
+            anim.SetBool("isMovingDown", true);
+            
         }
     }
 

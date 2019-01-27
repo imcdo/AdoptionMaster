@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PeopleGenerator : MonoBehaviour
 {
-    public static Queue<GameObject> peopleQ;
+    public static List<GameObject> peopleQ;
     [HideInInspector] public bool spawningPeople { get; private set; } = true;
     GameStatusManager gm;
     public static float maxPeopleQLength = 10;
@@ -14,7 +14,7 @@ public class PeopleGenerator : MonoBehaviour
         gm = FindObjectOfType<GameStatusManager>().GetComponent<GameStatusManager>();
 
         Debug.Assert(peopleQ == null);
-        peopleQ = new Queue<GameObject>();
+        peopleQ = new List<GameObject>();
 
         StartCoroutine("PersonSpawner");
     }
@@ -27,7 +27,7 @@ public class PeopleGenerator : MonoBehaviour
         Person ps = person.AddComponent<Person>();
         stats.dogBreed = Stats.breed.Human;
         ps.transform.name = "Person";
-        peopleQ.Enqueue(person);
+        peopleQ.Add(person);
         return person;
     }
 
@@ -48,7 +48,6 @@ public class PeopleGenerator : MonoBehaviour
             if(spawningPeople)
             {
                 GeneratePerson();
-                //Debug.Log("Created a Person");
 
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
             }

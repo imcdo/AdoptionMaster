@@ -37,7 +37,7 @@ public class UIManagerScript : MonoBehaviour
 
     public void OnPersonUpdate()
     {
-        Stats person = PeopleGenerator.peopleQ.Peek().GetComponent<Stats>();
+        Stats person = PeopleGenerator.peopleQ[0].GetComponent<Stats>();
 
         //string name = gameObject.transform.name;
         //Debug.Log(person.alergy);
