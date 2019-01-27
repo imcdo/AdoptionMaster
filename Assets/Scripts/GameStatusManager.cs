@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GameStatusManager : MonoBehaviour
 {
-    [HideInInspector] public float time { get; private set; }
+    [HideInInspector] public float currentTime { get; private set; }
     [HideInInspector] public int score { get; set; }
 
     GameObject selectedDog;
@@ -15,6 +15,16 @@ public class GameStatusManager : MonoBehaviour
     [HideInInspector] public static float minX;
     [HideInInspector] public static float maxY;
     [HideInInspector] public static float minY;
+
+    // time
+    public float startDay = 8;
+    public float endDay = 20;
+    public float daySpeed = 1;
+    public float dayLengthInSeconds = 50;
+    [Tooltip("the distribution of people over the day")]
+    public AnimationCurve peopleDistribution;
+    public float peoplePerNewDayModifier = 1.5f;
+    [HideInInspector] public int dayNumber = 0;
 
     UIManagerScript uiman;
 
@@ -53,21 +63,27 @@ public class GameStatusManager : MonoBehaviour
     {
         uiman = FindObjectOfType<UIManagerScript>().GetComponent<UIManagerScript>();
         dg = FindObjectOfType<DogGenerator>().GetComponent<DogGenerator>();
-        time = 0.0f;
+        currentTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        currentTime += (Time.deltaTime / dayLengthInSeconds) * daySpeed;
+        
+        if (currentTime >= 1)
+        {
+            currentTime = 0;
+            dayNumber++;
+            print("Day Ends");
+        }
         MouseInteractions();
     }
 
     public float DetermineWaitTime()
     {
-        if (time == 0.0f) return 10.0f;
-        else if (time > 100.0f) return 1.0f;
-        return 10.0f / (100 - time);
+        float fracDay = currentTime / dayLengthInSeconds;
+        return 1 - dayLengthInSeconds *((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f);
     }
 
     private void MouseInteractions()
@@ -124,7 +140,8 @@ public class GameStatusManager : MonoBehaviour
                 }
                 if (grabedDog.transform.position.y < minY && PeopleGenerator.peopleQ.Count != 0)
                 {
-                    GameObject person = PeopleGenerator.peopleQ.Dequeue();
+                    GameObject person = PeopleGenerator.peopleQ[0];
+                    PeopleGenerator.peopleQ.RemoveAt(0);
 
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
                     money += (1 - dif) * maxPayment;
