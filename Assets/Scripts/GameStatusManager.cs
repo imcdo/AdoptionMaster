@@ -162,7 +162,6 @@ public class GameStatusManager : MonoBehaviour
             // TODO: put dog in proper location
             if (grabedDog != null)
             {
-
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Vector3 point = ray.GetPoint(0);
                 point.z = 0;
