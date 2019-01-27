@@ -24,7 +24,11 @@ public class GameStatusManager : MonoBehaviour
     public float startDay = 8;
     public float endDay = 20;
     public float daySpeed = 1;
-    public float dayLengthInSeconds = 50;
+    public float dayLengthInSeconds = 90;
+
+    public int numDaysPerRentPayment = 3;
+    public float rentAmount = 3150;
+
     [Tooltip("the distribution of people over the day")]
     public AnimationCurve peopleDistribution;
     public float peoplePerNewDayModifier = .7f;
@@ -209,5 +213,7 @@ public class GameStatusManager : MonoBehaviour
         PeopleGenerator.peopleQ.Clear();
 
         for (int i = 0; i < numInQ; i++) cuemanager.RemoveFromQueue();
+
+        if (dayNumber % numDaysPerRentPayment == 0 && dayNumber != 0) money -= rentAmount; 
     }
 }
