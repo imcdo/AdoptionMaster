@@ -30,8 +30,8 @@ public class AnimalWander : MonoBehaviour
         timer = waitTime;
 
         // Finds new random location to move to within a set of bounds
-        target.position = new Vector2(Mathf.Clamp(target.position.x + Random.Range(-moveRange, moveRange), minX, maxX), 
-            Mathf.Clamp(target.position.y + Random.Range(-moveRange, moveRange), minY, maxY));
+        target.position = new Vector2(Mathf.Clamp(transform.position.x + Random.Range(-moveRange, moveRange), minX, maxX), 
+            Mathf.Clamp(transform.position.y + Random.Range(-moveRange, moveRange), minY, maxY));
     }
 
     void Update()
@@ -44,8 +44,8 @@ public class AnimalWander : MonoBehaviour
         {
             if (timer <= 0)
             {
-                target.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-                waitTime = Random.Range(waitTimeMin, waitTimeMax); // Creates a new random waitTime
+                target.position = new Vector2(Mathf.Clamp(transform.position.x + Random.Range(-moveRange, moveRange), minX, maxX),
+                            Mathf.Clamp(transform.position.y + Random.Range(-moveRange, moveRange), minY, maxY)); waitTime = Random.Range(waitTimeMin, waitTimeMax); // Creates a new random waitTime
                 timer = waitTime; // resets timer
             }
             else
