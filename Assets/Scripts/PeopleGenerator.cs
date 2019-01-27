@@ -25,6 +25,7 @@ public class PeopleGenerator : MonoBehaviour
         Stats stats = person.AddComponent<Stats>();
         SpriteRenderer sr = person.AddComponent<SpriteRenderer>();
         Person ps = person.AddComponent<Person>();
+        stats.dogBreed = Stats.breed.Human;
         ps.transform.name = "Person";
         peopleQ.Add(person);
         return person;

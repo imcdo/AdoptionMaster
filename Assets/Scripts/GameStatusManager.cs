@@ -54,7 +54,14 @@ public class GameStatusManager : MonoBehaviour
         Stats.breedStatDict = new Dictionary<Stats.breed, float>()
         {
             {Stats.breed.Shiba , 0.4f},
-            {Stats.breed.Dober , 0.6f}
+            {Stats.breed.Doberman , 0.6f},
+            {Stats.breed.ChowChow , 0.7f},
+            {Stats.breed.Terreir , 0.3f},
+            {Stats.breed.Pomeranian , 0.2f},
+            {Stats.breed.Poodle , 0.5f},
+            {Stats.breed.Chihuahua , 0.1f},
+            {Stats.breed.Human ,0f}
+
         };
     }
 
@@ -83,7 +90,9 @@ public class GameStatusManager : MonoBehaviour
     public float DetermineWaitTime()
     {
         float fracDay = currentTime / dayLengthInSeconds;
-        return 1 - dayLengthInSeconds *((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f);
+        var wait = dayLengthInSeconds * ( 1 - ((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        Debug.Log(wait + " waittime");
+        return wait;
     }
 
     private void MouseInteractions()
@@ -152,7 +161,7 @@ public class GameStatusManager : MonoBehaviour
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {
-                    grabedDog.transform.position = new Vector3(Random.Range(GameStatusManager.maxX, GameStatusManager.minX), Random.Range(GameStatusManager.maxY, GameStatusManager.minY));
+                    grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
                 }
 
             }
