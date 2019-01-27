@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Dog : MonoBehaviour
 {
+
+    AudioSource[] audioSrcs;
+
     string[] energyCategories = { "Relaxed", "Moderate", "Hyper" };
     string[] breedCategories = { "Chow Chow", "Terreir", "Pomeranian", "Poodle", "Shiba", "Doberman", "Chihuahua" };
     string[] upKeepCategories = { "Economical", "Reasonable", "High Maintence" };
@@ -61,6 +64,8 @@ public class Dog : MonoBehaviour
     {
         stats = GetComponent<Stats>();
         gameStatusManager = FindObjectOfType<GameStatusManager>();
+        audioSrcs = GetComponents<AudioSource>();
+
         //Get all information about the damn dogs.
 
         GetSubValues(stats);
