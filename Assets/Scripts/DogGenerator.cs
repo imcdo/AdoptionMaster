@@ -8,7 +8,7 @@ public class DogGenerator : MonoBehaviour
 {
     public static List<GameObject> Dogs;
 
-    Sprite[] Sprites;
+    GameObject[] DogPrefabs;
 
     [Tooltip("number of dogs at the begining of the game")]
     [SerializeField] private int numberOfStartingDogs = 10;
@@ -16,9 +16,9 @@ public class DogGenerator : MonoBehaviour
     private void Awake()
     {
         Dogs = new List<GameObject>();
-        Sprites = Resources.LoadAll<Sprite>("DogSprites");
-        Debug.Assert(Sprites != null);
-
+        DogPrefabs = Resources.LoadAll<GameObject>("DogPrefabs");
+        Debug.Assert(DogPrefabs != null);
+        
     }
     
     private void Start()
