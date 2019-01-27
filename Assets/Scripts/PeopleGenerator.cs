@@ -17,6 +17,8 @@ public class PeopleGenerator : MonoBehaviour
     {
         gm = FindObjectOfType<GameStatusManager>().GetComponent<GameStatusManager>();
 
+        uiManagerScript = FindObjectOfType<UIManagerScript>();
+
         Debug.Assert(peopleQ == null);
         peopleQ = new List<GameObject>();
 
