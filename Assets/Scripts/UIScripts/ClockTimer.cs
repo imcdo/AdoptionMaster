@@ -50,6 +50,7 @@ public class ClockTimer : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         // Wait 3 seconds before changing days
+        gsm.DayStart();
         ftb.FadeIn();
         currentTime = 0;
         dayEnded = false;
