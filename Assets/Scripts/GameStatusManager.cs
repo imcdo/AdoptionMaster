@@ -7,7 +7,7 @@ public class GameStatusManager : MonoBehaviour
 {
     [HideInInspector] public float time { get; private set; }
     [HideInInspector] public int score { get; set; }
-    [HideInInspector] public int money { get; set; }
+    //[HideInInspector] public int money { get; set; }
 
     GameObject selectedDog;
     GameObject grabedDog;
@@ -19,7 +19,7 @@ public class GameStatusManager : MonoBehaviour
 
     UIManagerScript uiman;
 
-    [HideInInspector] public float cash = 100;
+    [HideInInspector] public float money = 100;
 
     [Tooltip("The max amount of money for a mach")]
     [SerializeField] private float maxPayment = 100;
@@ -128,7 +128,7 @@ public class GameStatusManager : MonoBehaviour
                     GameObject person = PeopleGenerator.peopleQ.Dequeue();
 
                     float dif = Stats.StatDif(person.GetComponent<Stats>(), grabedDog.GetComponent<Stats>());
-                    cash += (1 - dif) * maxPayment;
+                    money += (1 - dif) * maxPayment;
 
                     DogGenerator.Dogs.Remove(grabedDog);
                     Destroy(grabedDog);
