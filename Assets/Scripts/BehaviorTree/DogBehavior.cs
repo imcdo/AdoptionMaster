@@ -140,6 +140,7 @@ public class DogBehavior : MonoBehaviour
         }
         else
         { 
+            if(ds.audioSrcs[0].isPlaying != true) { ds.audioSrcs[0].Play(); }
             return Status.RUNNING;
         }
     }
