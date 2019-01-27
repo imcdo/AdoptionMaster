@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class DogGenerator : MonoBehaviour
 {
-    static List<GameObject> Dogs;
+    public static List<GameObject> Dogs;
 
-    Sprite[] Sprites;
+    GameObject[] DogPrefabs;
 
     [Tooltip("number of dogs at the begining of the game")]
     [SerializeField] private int numberOfStartingDogs = 10;
@@ -16,48 +16,40 @@ public class DogGenerator : MonoBehaviour
     private void Awake()
     {
         Dogs = new List<GameObject>();
-        Sprites = Resources.LoadAll<Sprite>("DogSprites");
-        Debug.Assert(Sprites != null);
-
+        DogPrefabs = Resources.LoadAll<GameObject>("DogPrefabs");
+        Debug.Assert(DogPrefabs != null);
+        
+    }
+    
+    private void Start()
+    {
         for (int i = 0; i < numberOfStartingDogs; i++)
         {
-            SpawnDog();
+            GenerateDog();
         }
-
     }
 
     public GameObject GenerateDog()
     {
-        //Debug.Log(LayerMask.NameToLayer("Animals"));
-        gameObject.layer = LayerMask.NameToLayer("Animals");
-        //Debug.Log("layer : " + gameObject.layer);
+        
         Random spriteSelector = new Random();
-        GameObject dog = new GameObject();
-        Stats stats = dog.AddComponent<Stats>();
-        SpriteRenderer sr = dog.AddComponent<SpriteRenderer>();
-        sr.sprite = Sprites[Random.Range(0, Sprites.Length)];
-        Dog ds = dog.AddComponent<Dog>();
-        DogBehavior db = dog.AddComponent<DogBehavior>();
-        dog.transform.name = "Dog";
-        BoxCollider2D bc = dog.AddComponent<BoxCollider2D>();
-        bc.isTrigger = true;
-        Rigidbody2D rb = dog.AddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 0;
-        rb.freezeRotation = true;
+        GameObject dog = Instantiate(DogPrefabs[Random.Range(0, DogPrefabs.Length)]);
+        // Stats stats = dog.AddComponent<Stats>();
+        // SpriteRenderer sr = dog.AddComponent<SpriteRenderer>();
+        // Dog ds = dog.AddComponent<Dog>();
+        // DogBehavior db = dog.AddComponent<DogBehavior>();
+        // dog.transform.name = "Dog";
+        // BoxCollider2D bc = dog.AddComponent<BoxCollider2D>();
+        // bc.isTrigger = true;
+        // Rigidbody2D rb = dog.AddComponent<Rigidbody2D>();
+        // rb.bodyType = RigidbodyType2D.Dynamic;
+        // rb.gravityScale = 0;
+        // rb.freezeRotation = true;
+        dog.transform.position = new Vector3(Random.Range(GameStatusManager.maxX, GameStatusManager.minX), Random.Range(GameStatusManager.maxY, GameStatusManager.minY), 0);
+        gameObject.layer = LayerMask.NameToLayer("Animals");
 
+        Dogs.Add(dog);
         return dog;
-    }
-
-    public GameObject SpawnDog()
-    {
-        GameObject dog = GenerateDog();
-        // Instatiate the game object
-        GameObject ourDog = Instantiate(dog);
-
-        // add the instantiated game object to the list
-        Dogs.Add(ourDog);
-        return ourDog;
     }
 }
 
