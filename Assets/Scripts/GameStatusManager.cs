@@ -161,7 +161,7 @@ public class GameStatusManager : MonoBehaviour
                 }
                 else if (PeopleGenerator.peopleQ.Count == 0)
                 {
-                    grabedDog.transform.position = new Vector3(Random.Range(GameStatusManager.maxX, GameStatusManager.minX), Random.Range(GameStatusManager.maxY, GameStatusManager.minY));
+                    grabedDog.transform.position = new Vector3(grabedDog.transform.position.x, GameStatusManager.minY, 0);
                 }
 
             }

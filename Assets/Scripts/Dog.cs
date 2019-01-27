@@ -59,7 +59,7 @@ public class Dog : MonoBehaviour
     void Start()
     {
         stats = GetComponent<Stats>();
-        gameStatusManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStatusManager>();
+        gameStatusManager = FindObjectOfType<GameStatusManager>();
         //Get all information about the damn dogs.
 
         GetSubValues(stats);
