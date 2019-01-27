@@ -31,7 +31,7 @@ namespace BehaviorTreeSpace
 
             Initialize = () =>
             {
-                rnd = new Random();
+                rnd = new Random(GetHashCode());
                 index = chooseNewIndex();
             };
         }
