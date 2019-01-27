@@ -6,6 +6,8 @@ public class Dog : MonoBehaviour
 {
 
     public Animator anim;
+    public SpriteRenderer sr;
+
     public enum moveDirection { UP, DOWN, LEFT, RIGHT }
 
     private Stats stats;
@@ -20,6 +22,7 @@ public class Dog : MonoBehaviour
     {
         stats = GetComponent<Stats>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         // determine moveSpeed for the dog
         moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
@@ -70,14 +73,30 @@ public class Dog : MonoBehaviour
         print(GetMoveDir(moveDir));
         if (GetMoveDir(moveDir) == moveDirection.UP)
         {
+            anim.SetBool("isMovingSide", false);
             anim.SetBool("isMovingDown", false);
             anim.SetBool("isMovingUp", true);
         }
         else if (GetMoveDir(moveDir) == moveDirection.DOWN)
         {
-            anim.SetBool("isMovingUp", false);
+            anim.SetBool("isMovingSide", false);
             anim.SetBool("isMovingDown", true);
-            
+            anim.SetBool("isMovingUp", false);
+        }
+
+        if (GetMoveDir(moveDir) == moveDirection.RIGHT)
+        {
+            anim.SetBool("isMovingUp", false);
+            anim.SetBool("isMovingDown", false);
+            anim.SetBool("isMovingSide", true);
+            sr.flipX = true;
+        }
+        else if (GetMoveDir(moveDir) == moveDirection.LEFT)
+        {
+            anim.SetBool("isMovingUp", false);
+            anim.SetBool("isMovingDown", false);
+            anim.SetBool("isMovingSide", true);
+            sr.flipX = false;
         }
     }
 
