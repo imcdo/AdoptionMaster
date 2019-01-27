@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7125268498640470404}
   - component: {fileID: 7071366872679632308}
   - component: {fileID: 637248965500368177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,8 @@ MonoBehaviour:
   familyText: 
   petsText: 
   maxSpeed: 1
+  moveSpeed: 3
+  runSpeed: 6
   moveDir: {x: 0, y: 0, z: 0}
 --- !u!114 &7125268498640470404
 MonoBehaviour:
@@ -154,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbed: 0
   startActionInterval: 5
+  playRadius: 0.5
 --- !u!61 &7071366872679632308
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +174,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 3.2, y: 3.2}
     newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
