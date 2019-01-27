@@ -96,7 +96,7 @@ public class GameStatusManager : MonoBehaviour
     {
 
         float fracDay = currentTime / dayLengthInSeconds;
-        var wait = dayLengthInSeconds * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        var wait = (dayLengthInSeconds  * (((peoplePerNewDayModifier / (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f))) / 2;
         Debug.Log("Wait time running " + wait);
         return wait;
     }
