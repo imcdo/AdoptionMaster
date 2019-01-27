@@ -52,7 +52,8 @@ public class Dog : MonoBehaviour
     
     [Tooltip("Max dog moveSpeed")]
     [SerializeField] private float maxSpeed = 1;
-    public float moveSpeed;
+    public float moveSpeed = 3;
+    public float runSpeed = 6;
     [SerializeField] public Vector3 moveDir;
 
     // Start is called before the first frame update

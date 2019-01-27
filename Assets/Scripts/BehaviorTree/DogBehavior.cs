@@ -59,7 +59,7 @@ public class DogBehavior : MonoBehaviour
         }
         else
         {
-            ds.Wander();
+            ds.transform.Translate(ds.moveDir * ds.moveSpeed * Time.deltaTime);
             return Status.RUNNING;
         }
     }
@@ -75,7 +75,7 @@ public class DogBehavior : MonoBehaviour
         }
         else
         {
-            ds.Wander();
+            ds.transform.Translate(ds.moveDir * ds.runSpeed * Time.deltaTime);
             return Status.RUNNING;
         }
     }
@@ -90,12 +90,9 @@ public class DogBehavior : MonoBehaviour
             return Status.SUCCESS;
         }
         else
-        {
-            ds.Wander();
+        
             return Status.RUNNING;
         }
-    }
-
     Status Play()
     {
         if (actionTimer >= actionInterval)
@@ -106,8 +103,7 @@ public class DogBehavior : MonoBehaviour
             return Status.SUCCESS;
         }
         else
-        {
-            ds.Wander();
+        { 
             return Status.RUNNING;
         }
     }
