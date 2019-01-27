@@ -11,7 +11,7 @@ public class Stats : MonoBehaviour
 
     private void Awake()
     {
-        alergy = Random.value;
+        alergy = Random.value; 
         fancy = Random.value;
         energy = Random.value;
         sociality = Random.value;

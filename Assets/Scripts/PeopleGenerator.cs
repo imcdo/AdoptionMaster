@@ -26,17 +26,17 @@ public class PeopleGenerator : MonoBehaviour
         SpriteRenderer sr = person.AddComponent<SpriteRenderer>();
         Person ps = person.AddComponent<Person>();
         ps.transform.name = "Person";
-
+        peopleQ.Enqueue(person);
         return person;
     }
 
-    public GameObject spawnPerson()
-    {
-        GameObject person = GeneratePerson();
-        GameObject ourPerson = Instantiate(person);
-        peopleQ.Enqueue(ourPerson);
-        return ourPerson;
-    }
+    //public GameObject spawnPerson()
+    //{
+    //    GameObject person = GeneratePerson();
+    //    GameObject ourPerson = Instantiate(person);
+    //    peopleQ.Enqueue(ourPerson);
+    //    return ourPerson;
+    //}
 
     IEnumerator PersonSpawner()
     {
@@ -46,8 +46,8 @@ public class PeopleGenerator : MonoBehaviour
             else { spawningPeople = true; }
             if(spawningPeople)
             {
-                spawnPerson();
-                Debug.Log("Created a Person");
+                GeneratePerson();
+                //Debug.Log("Created a Person");
 
                 yield return new WaitForSeconds(gm.DetermineWaitTime());
             }

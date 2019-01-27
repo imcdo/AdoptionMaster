@@ -38,7 +38,7 @@ public class GameStatusManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Down");
+            //Debug.Log("Mouse Down");
             Debug.Assert(grabedDog == null);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
@@ -49,12 +49,12 @@ public class GameStatusManager : MonoBehaviour
             Debug.Log(Animal);
 
             Animal.layer = LayerMask.NameToLayer("Mouse");
-            Debug.Log("layer :" + Animal.layer);
+            //Debug.Log("layer :" + Animal.layer);
             DogBehavior db = grabedDog.GetComponent<DogBehavior>();
             if (db != null)
             {
                 db.grabbed = true;
-                Debug.Log("Dog grabbed");
+                //Debug.Log("Dog grabbed");
             }
         }
         if (Input.GetMouseButtonUp(0))

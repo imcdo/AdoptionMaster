@@ -34,7 +34,7 @@ public class Dog : MonoBehaviour
         minY = bottomRight.y;
         maxY = topLeft.y;
 
-        Debug.Log(minX + " " + maxX + " " + minY + " " + maxY);
+       // Debug.Log(minX + " " + maxX + " " + minY + " " + maxY);
 
         // determine moveSpeed for the dog
         moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
