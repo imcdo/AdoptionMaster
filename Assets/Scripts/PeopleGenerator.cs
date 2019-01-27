@@ -36,15 +36,13 @@ public class PeopleGenerator : MonoBehaviour
         stats.dogBreed = Stats.breed.Human;
         ps.transform.name = "Person";
         
-        //IF the count of the queue is ZERO that means the VERY next person has to be show on the UI
-        if(peopleQ.Count == 0)
-        {
-            //call UI manager to show player card with info.
-            uiManagerScript.OnPersonUpdate();
-        }
+        
 
         peopleQ.Add(person);
         cuemanager.AddToQueue();
+
+        // IF the count of the queue is one that means the VERY next person has to be show on the UI
+  
         return person;
     }
 

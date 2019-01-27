@@ -12,6 +12,7 @@ public class Person : MonoBehaviour
     string[] familyCategories = { "Single", "Married", "Kids"};
     string[] petsCategories = { "None", "Few", "Lots" };
 
+
     public string allergyText;
     public string incomeText;
     public string spaceText;
@@ -19,6 +20,7 @@ public class Person : MonoBehaviour
     public string energyText;
     public string familyText;
     public string petsText;
+    public int spriteIndex;
 
 
     /** People
@@ -44,8 +46,10 @@ public class Person : MonoBehaviour
 
     Stats personStats;
 
+    UIManagerScript uiMan;
     void Start()
     {
+        uiMan = GetComponent<UIManagerScript>();
         personStats = GetComponent<Stats>();
         Debug.Log("new person spawned");
        // Debug.Log(gameObject.name + personStats.fancy);
@@ -60,9 +64,13 @@ public class Person : MonoBehaviour
         energyText = SetStringCategory(energyCategories, energyRating);
         familyText = SetStringCategory(familyCategories, familyRating);
         petsText = SetStringCategory(petsCategories, petsRating);
-
+        spriteIndex = Random.Range(0, 6);
         // Debug.Log(allergyText + " " + incomeText + " " + spaceText + " " + ageText + " " + energyText + " " + familyText + " " + petsText);
-
+        if (PeopleGenerator.peopleQ.Count == 1)
+        {
+            //call UI manager to show player card with info.
+            FindObjectOfType<UIManagerScript>().OnPersonUpdate();
+        }
     }
 
 

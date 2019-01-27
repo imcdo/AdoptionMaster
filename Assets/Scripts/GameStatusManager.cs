@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 using UnityEngine.EventSystems;
 
 public class GameStatusManager : MonoBehaviour
@@ -138,8 +140,12 @@ public class GameStatusManager : MonoBehaviour
                     family = "Family Friendly: " + d.familyText;
                     pet = "Pet Friendly: " + d.petsText;
 
+
+                    Sprite dogImage = d.GetComponent<SpriteRenderer>().sprite;
+                    Debug.Log("Sprite to be rendered name is " + dogImage.name);
+
                     uiman.OnAnimalUpdate(breed, age, allergy, energy,
-                        maintenance, family, pet);
+                        maintenance, family, pet, dogImage);
 
                 }
             }
