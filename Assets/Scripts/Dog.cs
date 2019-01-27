@@ -53,22 +53,18 @@ public class Dog : MonoBehaviour
         if(pos.x <= GameStatusManager.minX && moveDir.x < 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.right);
-            Debug.Log("trip");
         }
         if (pos.x >= GameStatusManager.maxX && moveDir.x > 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.left);
-            Debug.Log("trip");
         }
         if (pos.y <= GameStatusManager.minY && moveDir.y < 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.up);
-            Debug.Log("trip");
         } 
         if (pos.y >= GameStatusManager.maxY && moveDir.y > 0)
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
-            Debug.Log("tripy+");
         }
 
         print(GetMoveDir(moveDir));

@@ -83,7 +83,9 @@ public class GameStatusManager : MonoBehaviour
     public float DetermineWaitTime()
     {
         float fracDay = currentTime / dayLengthInSeconds;
-        return 1 - dayLengthInSeconds *((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f);
+        var wait = dayLengthInSeconds * ( 1 - ((peoplePerNewDayModifier * (1 + dayNumber) * peopleDistribution.Evaluate(fracDay)) * 0.7f + Random.value * 0.3f));
+        Debug.Log(wait + " waittime");
+        return wait;
     }
 
     private void MouseInteractions()
