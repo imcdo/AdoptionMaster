@@ -28,7 +28,7 @@ public class ClockTimer : MonoBehaviour
     void Update()
     {
         currentTime += (Time.deltaTime / gameLengthInSeconds) * daySpeed;
-        print(currentTime);
+        //print(currentTime);
       
         int idx = (int)Mathf.Floor(currentTime * clock.Length);
         if (idx < clock.Length)

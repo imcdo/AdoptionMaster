@@ -5,10 +5,8 @@ using UnityEngine;
 public class Dog : MonoBehaviour
 {
 
-
+    public Animator anim;
     public enum moveDirection { UP, DOWN, LEFT, RIGHT }
-
-   
 
     private Stats stats;
     
@@ -20,7 +18,8 @@ public class Dog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stats = GetComponent<Stats>();        
+        stats = GetComponent<Stats>();
+        anim = GetComponent<Animator>();
 
         // determine moveSpeed for the dog
         moveSpeed = maxSpeed * (.5f + (stats.energy / 2));
@@ -70,6 +69,19 @@ public class Dog : MonoBehaviour
         {
             moveDir = Vector3.Reflect(moveDir, Vector3.down);
             Debug.Log("tripy+");
+        }
+
+        print(GetMoveDir(moveDir));
+        if (GetMoveDir(moveDir) == moveDirection.UP)
+        {
+            anim.SetBool("isMovingDown", false);
+            anim.SetBool("isMovingUp", true);
+        }
+        else if (GetMoveDir(moveDir) == moveDirection.DOWN)
+        {
+            anim.SetBool("isMovingUp", false);
+            anim.SetBool("isMovingDown", true);
+            
         }
     }
 
