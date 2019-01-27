@@ -7,7 +7,6 @@ public class GameStatusManager : MonoBehaviour
 {
     [HideInInspector] public float time { get; private set; }
     [HideInInspector] public int score { get; set; }
-    //[HideInInspector] public int money { get; set; }
 
     GameObject selectedDog;
     GameObject grabedDog;
@@ -41,12 +40,6 @@ public class GameStatusManager : MonoBehaviour
 
         Debug.Log(topLeft + " " + bottomRight);
         Debug.Log(minX + " " + maxX + " " + minY + " " + maxY);
-
-        Stats.breedStatDict = new Dictionary<Stats.breed, float>()
-        {
-            {Stats.breed.Shiba , 0.4f },
-            {Stats.breed.Dober , 0.6f }
-        };
     }
 
     // Start is called before the first frame update
